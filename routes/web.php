@@ -13,4 +13,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/food/search',[\App\Http\Controllers\FoodController::class, 'filter'])->middleware('setLang');
+

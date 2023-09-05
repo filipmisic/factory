@@ -4,11 +4,9 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
 use Symfony\Component\HttpFoundation\Response;
-use Illuminate\Support\Facades\Validator;
 
-class SetLanguage
+class ForseJson
 {
     /**
      * Handle an incoming request.
@@ -17,15 +15,7 @@ class SetLanguage
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $validator = Validator::make($request->all(),[
-            'lang' => ['required','string','exists:languages,lang']
-        ]);
-
-        if($validator->fails())
-        {
-            return response($validator->errors(),400);
-        }
-        App::setLocale($request->lang);
+        $request->headers->set('Accept', 'application/json');
         return $next($request);
     }
 }
